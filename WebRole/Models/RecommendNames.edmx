@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="RecommendedNamesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="RecommendedNamesModelStoreContainer">
+          <EntitySet Name="FirstName" EntityType="RecommendedNamesModel.Store.FirstName" store:Type="Tables" store:Schema="dbo" store:Name="FirstName">
+            <DefiningQuery>SELECT 
+      [FirstName].[Name] AS [Name], 
+      [FirstName].[Count] AS [Count], 
+      [FirstName].[Sum] AS [Sum], 
+      [FirstName].[MaleCount] AS [MaleCount], 
+      [FirstName].[FemaleCount] AS [FemaleCount]
+      FROM [dbo].[FirstName] AS [FirstName]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="RelatedNames" EntityType="RecommendedNamesModel.Store.RelatedNames" store:Type="Tables" store:Schema="dbo" store:Name="RelatedNames">
+            <DefiningQuery>SELECT 
+      [RelatedNames].[Seed] AS [Seed], 
+      [RelatedNames].[Result] AS [Result], 
+      [RelatedNames].[Weight] AS [Weight], 
+      [RelatedNames].[ResultSum] AS [ResultSum], 
+      [RelatedNames].[ResultCount] AS [ResultCount]
+      FROM [dbo].[RelatedNames] AS [RelatedNames]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'RecommendedNames.dbo.FirstName' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="FirstName">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Count" Type="int" Nullable="false" />
+          <Property Name="Sum" Type="int" Nullable="false" />
+          <Property Name="MaleCount" Type="int" Nullable="false" />
+          <Property Name="FemaleCount" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'RecommendedNames.dbo.RelatedNames' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="RelatedNames">
+          <Key>
+            <PropertyRef Name="Seed" />
+            <PropertyRef Name="Result" />
+            
+            
+            
+          </Key>
+          <Property Name="Seed" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Result" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Weight" Type="int" Nullable="false" />
+          <Property Name="ResultSum" Type="int" Nullable="false" />
+          <Property Name="ResultCount" Type="int" Nullable="false" />
+        </EntityType>
+        <Function Name="GetNamesByPrefix" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StartsWith" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="IncrementGender" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="IsMale" Type="bit" Mode="In" />
+        </Function>
+        <!--Errors Found During Generation:
+      warning 6005: The function 'GetRelatedNames' has a parameter 'Names' at parameter index 0 that has a data type 'table type' which is not supported. The function was excluded.
+      warning 6005: The function 'GetRelatedNames' has a parameter 'NamesExcluded' at parameter index 1 that has a data type 'table type' which is not supported. The function was excluded.
+      warning 6005: The function 'GetRelatedNames' has a parameter 'NamesBlocked' at parameter index 2 that has a data type 'table type' which is not supported. The function was excluded.
+      
+      <Function Name="GetRelatedNames" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />-->
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RecommendedNamesModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="RecommendedNamesEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="RelatedNames" EntityType="RecommendedNamesModel.RelatedName" />
+          <EntitySet Name="FirstNames" EntityType="RecommendedNamesModel.FirstName" />
+          <FunctionImport Name="IncrementGender">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="IsMale" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="GetNamesByPrefix" ReturnType="Collection(RecommendedNamesModel.NamesByPrefixResult)">
+            <Parameter Name="StartsWith" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="RelatedName">
+          <Key>
+            <PropertyRef Name="Seed" />
+            <PropertyRef Name="Result" />
+          </Key>
+          <Property Name="Seed" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Result" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Weight" Type="Int32" Nullable="false" />
+          <Property Name="ResultSum" Type="Int32" Nullable="false" />
+          <Property Name="ResultCount" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FirstName">
+          <Key>
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="Count" Nullable="false" />
+          <Property Type="Int32" Name="Sum" Nullable="false" />
+          <Property Type="Int32" Name="MaleCount" Nullable="false" />
+          <Property Type="Int32" Name="FemaleCount" Nullable="false" />
+        </EntityType>
+        <ComplexType Name="NamesByPrefixResult">
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Sum" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RecommendedNamesModelStoreContainer" CdmEntityContainer="RecommendedNamesEntities">
+          <EntitySetMapping Name="RelatedNames"><EntityTypeMapping TypeName="RecommendedNamesModel.RelatedName"><MappingFragment StoreEntitySet="RelatedNames">
+            <ScalarProperty Name="Seed" ColumnName="Seed" />
+            <ScalarProperty Name="Result" ColumnName="Result" />
+            <ScalarProperty Name="Weight" ColumnName="Weight" />
+            <ScalarProperty Name="ResultSum" ColumnName="ResultSum" />
+            <ScalarProperty Name="ResultCount" ColumnName="ResultCount" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="FirstNames">
+            <EntityTypeMapping TypeName="RecommendedNamesModel.FirstName">
+              <MappingFragment StoreEntitySet="FirstName">
+                <ScalarProperty Name="FemaleCount" ColumnName="FemaleCount" />
+                <ScalarProperty Name="MaleCount" ColumnName="MaleCount" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="IncrementGender" FunctionName="RecommendedNamesModel.Store.IncrementGender" />
+          <FunctionImportMapping FunctionImportName="GetNamesByPrefix" FunctionName="RecommendedNamesModel.Store.GetNamesByPrefix">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="RecommendedNamesModel.NamesByPrefixResult">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="RecommendNames">
+        <EntityTypeShape EntityType="RecommendedNamesModel.RelatedName" Width="1.5" PointX="0.75" PointY="0.75" Height="1.9802864583333331" IsExpanded="true" />
+        <EntityTypeShape EntityType="RecommendedNamesModel.FirstName" Width="1.5" PointX="3.375" PointY="0.75" Height="1.9802864583333335" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

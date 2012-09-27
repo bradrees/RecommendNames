@@ -1,0 +1,28 @@
+﻿@model IEnumerable<WebRole.Models.RelatedNameResult>
+<ul id="list" class="image-grid results">
+    @if (this.Model.Any())
+    {
+        var i = 0;
+        foreach (var result in this.Model)
+        {
+            <li data-id="id-@result.Name" class="@result.GenderClass">
+                <strong><span><a class="select" href="#@result.Name">@result.Name</a></span></strong> 
+                <span class="buttons">
+                    <a href="#@result.Name" class="save"><img src="@Url.Content("~/Content/i/star.png")" alt="Save this name" title="Save this name" /></a>
+                    <a href="#@result.Name" class="include"><img src="@Url.Content("~/Content/i/vote_yes.png")" alt="Add to search list" title="Add to search list" /></a>
+                    <a href="#@result.Name" class="exclude"><img src="@Url.Content("~/Content/i/vote_no.png")" alt="Dislike this name and similar ones" title="Dislike this name and similar ones" /></a> 
+                    <a href="#@result.Name" class="block"><img src="@Url.Content("~/Content/i/stop.png")" alt="Block this name only" title="Block this name only" /></a>
+                    <br/>
+                    <a href="#@result.Name" class="addMale"><img src="@Url.Content("~/Content/i/male.png")" alt="This is a boys' name" title="This is a boys' name" /></a> 
+                    <a href="#@result.Name" class="addFemale"><img src="@Url.Content("~/Content/i/female.png")" alt="This is a girls' name" title="This is a girls' name" /></a>
+                </span>
+                <input type="hidden" class="sum" value="@(-result.Sum)"/>
+                <input type="hidden" class="rank" value="@(i++)"/>
+            </li> 
+        }
+    }
+    else
+    {
+        <li  data-id="id-noresults">No related names have been found</li>
+    }
+</ul>

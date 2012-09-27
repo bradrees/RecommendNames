@@ -1,0 +1,400 @@
+﻿@model List<string>
+@{
+    ViewBag.Title = "Search for names";
+}
+
+<ul class="splitter">
+<li>
+To start click a name or search here: <input type="text" class="searchbox" /> <a href="#" class="search button">Search</a>
+</li>
+</ul>
+<div class="lists">    
+    <div class="list">
+        <span><img src="@Url.Content("~/Content/i/star.png")" alt="Saved" title="Saved" /> Saved:</span>
+        <ul class="saved"></ul>
+    </div>
+    <div class="list">
+        <span><img src="@Url.Content("~/Content/i/vote_yes.png")" alt="Searching" title="Searching" /> Searching:</span>
+        <ul class="included"></ul>
+    </div>
+    <div class="list">
+        <span><img src="@Url.Content("~/Content/i/vote_no.png")" alt="Dislike" title="Dislike" /> Dislike:</span>
+        <ul class="excluded"></ul>
+    </div>
+    <div class="list">
+        <span><img src="@Url.Content("~/Content/i/stop.png")" alt="Block" title="Block" /> Block:</span>
+        <ul class="blocked"></ul>
+    </div>
+</div>
+<ul class="splitter">
+    <li>Filter by type:<ul><li class="segment-1 selected-1"><a href="#" data-value="all">All</a></li><li class="segment-0"><a href="#" data-value="unisex">Unisex</a></li><li class="segment-0"><a href="#" data-value="male">Boys</a></li><li class="segment-2"><a href="#" data-value="female">Girls</a></li></ul>
+    </li>
+    <li>Sort by:<ul>
+        <li class="segment-1 selected-1"><a href="#" data-value="rank">Rank</a></li><li class="segment-0"><a href="#" data-value="name">Name</a></li><li class="segment-2"><a href="#" data-value="size">Popular</a></li></ul>
+    </li>
+</ul>
+<div class="demo">
+    <ul id="list" class="results image-grid"></ul>
+</div>
+<p class="splitter">
+    The data set does not include gender information so please help to add it. <img src="@Url.Content("~/Content/i/male.png")" alt="Male" title="Male" /> <img src="@Url.Content("~/Content/i/female.png")" alt="Female" title="Female" /></p>
+<p>Try these names, you might find the results are a good start:     
+    <a class="select" href="#pineapple">Pineapple</a>,
+    <a class="select" href="#pig">Pig</a>,
+    <a class="select" href="#love">Love</a>,
+    <a class="select" href="#red">Red</a>,
+    <a class="select" href="#pierre">Pierre</a>,
+    <a class="select" href="#pedro">Pedro</a>,
+    <a class="select" href="#hans">Hans</a>,
+    <a class="select" href="#takashi">Takashi</a>,
+    <a class="select" href="#bing">Bing</a>,
+    <a class="select" href="#dashawn">Dashawn</a>,
+    <a class="select" href="#barack">Barack</a>
+</p>
+<p>For more info about this website <a class="showAbout" href="#">click here</a></p>
+<p id="performance-toggle">
+Seems sluggish? <a href="#">Disable CSS3 scaling</a> and try again.</p>
+<div class="about" style="display: none">
+<div id="dialog" title="About">
+@{Html.RenderAction(MVC.Home.About());}
+</div>
+</div>
+@*<div class="actions">
+    <p>
+        <a class="download" href="https://github.com/razorjack/quicksand/raw/master/jquery.quicksand.js">
+            <strong>Download</strong> <span>Version <span class="version">1.2.2</span></span>
+        </a>
+    </p>
+    <p>
+        <a class="demos-n-docs" href="docs-and-demos.html"><strong>Demos &amp; Docs</strong>
+        </a>
+    </p>
+    <p>
+        <a class="fork" href="http://github.com/razorjack/quicksand/"><strong>Fork on GitHub</strong>
+        </a>
+    </p>
+</div>*@
+
+<script type="text/javascript">
+    if (!Array.indexOf) {
+        Array.prototype.indexOf = function(obj) {
+            for (var i = 0; i < this.length; i++) {
+                if (this[i] == obj) {
+                    return i;
+                }
+            }
+            return -1;
+        };
+    }
+
+    var NameRec = (function () {
+        var include = [];
+        var exclude = [];
+        var block = [];
+        var save = [];
+        var $list = $('#list');
+        var $data = {}; //$list.clone()
+        var $preferences = {
+            duration: 400,
+            easing: 'easeInOutQuad',
+            adjustHeight: false
+        };
+
+        $(function () {
+            $(".button").button();
+
+            $('a.showAbout').live('click', function () {
+                $(".about").dialog({ width: 600 });
+                return false;
+            });
+
+            $('a.select').live('click', function () {
+                include = [$(this).attr('href').substring(1)];
+                fetch();
+                _gaq.push(['_trackEvent', 'Names', 'Select', include.join(',')]);
+                return false;
+            });
+
+            $('a.search').live('click', function () {
+                include = [$('.searchbox').val()];
+                fetch();
+                _gaq.push(['_trackEvent', 'Names', 'Search', include.join(',')]);
+                return false;
+            });
+
+            $('.results a.include').live('click', function () {
+                var idx = include.indexOf($(this).attr('href').substring(1));
+                if (idx == -1) include.push($(this).attr('href').substring(1));
+                _gaq.push(['_trackEvent', 'Names', 'Include', include.join(',')]);
+                fetch();
+                return false;
+            });
+
+            $('.results a.save').live('click', function () {
+                var idx = save.indexOf($(this).attr('href').substring(1));
+                if (idx == -1) save.push($(this).attr('href').substring(1));
+                fetch(true);
+                return false;
+            });
+
+            $('.results a.exclude').live('click', function () {
+                var idx = exclude.indexOf($(this).attr('href').substring(1));
+                if (idx == -1) exclude.push($(this).attr('href').substring(1));
+                fetch();
+                return false;
+            });
+
+            $('.results a.block').live('click', function () {
+                var idx = block.indexOf($(this).attr('href').substring(1));
+                if (idx == -1) block.push($(this).attr('href').substring(1));
+                fetch();
+                return false;
+            });
+
+            $('.included a.remove').live('click', function () {
+                var idx = include.indexOf($(this).attr('href').substring(1));
+                if (idx != -1) include.splice(idx, 1);
+                fetch();
+                return false;
+            });
+
+            $('.saved a.remove').live('click', function () {
+                var idx = save.indexOf($(this).attr('href').substring(1));
+                if (idx != -1) save.splice(idx, 1);
+                fetch();
+                return false;
+            });
+
+            $('.excluded a.remove').live('click', function () {
+                var idx = exclude.indexOf($(this).attr('href').substring(1));
+                if (idx != -1) exclude.splice(idx, 1);
+                fetch();
+                return false;
+            });
+
+            $('.blocked a.remove').live('click', function () {
+                var idx = block.indexOf($(this).attr('href').substring(1));
+                if (idx != -1) block.splice(idx, 1);
+                fetch();
+                return false;
+            });
+
+            $('.blocked a.remove').live('click', function () {
+                var idx = block.indexOf($(this).attr('href').substring(1));
+                if (idx != -1) block.splice(idx, 1);
+                fetch();
+                return false;
+            });
+
+            $('.blocked a.remove').live('click', function () {
+                var idx = block.indexOf($(this).attr('href').substring(1));
+                if (idx != -1) block.splice(idx, 1);
+                fetch();
+                return false;
+            });
+
+            $('a.addMale').live('click', function () {
+                $.post(
+                    '@Url.Action(MVC.Home.AddGenderInfo())',
+                    { name: $(this).attr('href').substring(1), isMale: true });
+                _gaq.push(['_trackEvent', 'Names', 'AddMale', $(this).attr('href').substring(1)]);
+                return false;
+            });
+
+            $('a.addFemale').live('click', function () {
+                $.post(
+                    '@Url.Action(MVC.Home.AddGenderInfo())',
+                    { name: $(this).attr('href').substring(1), isMale: false });
+                _gaq.push(['_trackEvent', 'Names', 'AddFemale', $(this).attr('href').substring(1)]);
+                return false;
+            });
+
+            var readButton = function (classNames) {
+                var r = {
+                    selected: false,
+                    type: 0
+                };
+                for (var i = 0; i < classNames.length; i++) {
+                    if (classNames[i].indexOf('selected-') == 0) {
+                        r.selected = true;
+                    }
+                    if (classNames[i].indexOf('segment-') == 0) {
+                        r.segment = classNames[i].split('-')[1];
+                    }
+                };
+                return r;
+            };
+
+            var $controls = $('ul.splitter ul');
+
+            $controls.each(function () {
+
+                var $control = $(this);
+                var $buttons = $control.find('a');
+
+                $buttons.live('click', function () {
+                    var $button = $(this);
+                    var $buttonContainer = $button.parent();
+                    var buttonProperties = readButton($buttonContainer.attr('class').split(' '));
+                    var selected = buttonProperties.selected;
+                    var buttonSegment = buttonProperties.segment;
+
+                    if (!selected) {
+
+                        $buttons.parent().removeClass('selected-0').removeClass('selected-1').removeClass('selected-2');
+                        $buttonContainer.addClass('selected-' + buttonSegment);
+
+                        $list.quicksand(applyFilterSort($data), $preferences);
+                    }
+
+                    return false;
+                });
+
+            });
+
+            var highPerformance = true;
+            var $performanceContainer = $('#performance-toggle');
+            var $originalHtml = $performanceContainer.html();
+
+            $performanceContainer.find('a').live('click', function (e) {
+                if (highPerformance) {
+                    $preferences.useScaling = false;
+                    $performanceContainer.html('CSS3 scaling turned off. <a href="#toggle">Reverse</a>.');
+                    highPerformance = false;
+                } else {
+                    $preferences.useScaling = true;
+                    $performanceContainer.html($originalHtml);
+                    highPerformance = true;
+                }
+                return false;
+            });
+
+            var cache = {}, lastXhr;
+            $(".searchbox").autocomplete({
+                source: function (request, response) {
+                    var term = request.term;
+                    if (term in cache) {
+                        response(cache[term]);
+                        return;
+                    }
+
+                    lastXhr = $.getJSON("@Url.Action(MVC.Home.GetNamesByPrefix())", request, function (data, status, xhr) {
+                        cache[term] = data;
+                        if (xhr === lastXhr) {
+                            response(data);
+                        }
+                    });
+                },
+                select: function (event, ui) {
+                    include = [ui.item.value];
+                    fetch();
+                }
+            });
+
+            fetch();
+        });
+
+        var fetch = function (noServerUpdate) {
+
+            if (!noServerUpdate) {
+                $.post(
+                '@Url.Action(MVC.Home.RelatedNames())',
+                { include: include.join(','), exclude: exclude.join(','), block: block.join(',') },
+                function (data) {
+                    $data = $(data).clone();
+                    $('.results').quicksand(
+                        applyFilterSort(),
+                        { duration: 400, easing: 'easeInOutQuad', adjustHeight: 'dynamic' });
+                });
+            }
+
+            var generateLists = function (list, selector) {
+                var html = '<ul>';
+                for (var i = 0; i < list.length; i++) {
+                    html += '<li data-id="list-' + list[i] + '"><a href="#' + list[i] + '" class="remove">' + list[i] + '</a></li>';
+                }
+                html += '</ul>';
+
+                $(selector).quicksand($(html).find('li'), { adjustHeight: 'dynamic' });
+            };
+
+            generateLists(include, '.included');
+            generateLists(exclude, '.excluded');
+            generateLists(block, '.blocked');
+            generateLists(save, '.saved');
+        };
+
+        var applyFilterSort = function (data) {
+            data = $data || data;
+            var $controls = $('ul.splitter ul');
+            var sortingType = determineSort($controls.eq(1).find('a'));
+            var sortingKind = determineKind($controls.eq(0).find('a'));
+            var $filteredData;
+            if (sortingKind == 'all') {
+                $filteredData = data.find('li');
+            } else {
+                $filteredData = data.find('li.' + sortingKind);
+            }
+            var $sortedData;
+            if (sortingType == 'size') {
+                $sortedData = $filteredData.sorted({
+                    by: function (v) {
+                        return parseFloat($(v).find('input.sum').val());
+                    }
+                });
+            } else if (sortingType == 'rank') {
+                $sortedData = $filteredData.sorted({
+                    by: function (v) {
+                        return parseFloat($(v).find('input.rank').val());
+                    }
+                });
+            } else {
+                $sortedData = $filteredData.sorted({
+                    by: function (v) {
+                        return $(v).find('strong .select').text().toLowerCase();
+                    }
+                });
+            }
+
+            return $sortedData;
+        };
+
+        var determineSort = function ($buttons) {
+            var $selected = $buttons.parent().filter('[class*="selected-"]');
+            return $selected.find('a').attr('data-value');
+        };
+
+        var determineKind = function ($buttons) {
+            var $selected = $buttons.parent().filter('[class*="selected-"]');
+            return $selected.find('a').attr('data-value');
+        };
+
+        // Extend jQuery with sorted()
+        (function ($) {
+            $.fn.sorted = function (customOptions) {
+                var options = {
+                    reversed: false,
+                    by: function (a) {
+                        return a.text();
+                    }
+                };
+                $.extend(options, customOptions);
+
+                //data = $(this);
+                var arr = $(this).get();
+                arr.sort(function (a, b) {
+
+                    var valA = options.by($(a));
+                    var valB = options.by($(b));
+                    if (options.reversed) {
+                        return (valA < valB) ? 1 : (valA > valB) ? -1 : 0;
+                    } else {
+                        return (valA < valB) ? -1 : (valA > valB) ? 1 : 0;
+                    }
+                });
+                return $(arr);
+            };
+
+        })(jQuery);
+    })();
+</script>
