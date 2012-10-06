@@ -13,15 +13,18 @@ namespace WebRole.Controllers
     {
         public static void AddGenderInformation(string name, bool isMale)
         {
-            var db = new RecommendedNamesEntities();
-            db.IncrementGender(name, isMale);
-            db.Dispose();
+            using (var db = new RecommendedNamesEntities())
+            {
+                db.IncrementGender(name, isMale);
+            }
         }
 
         public static IEnumerable<string> GetNamesByPrefix(string prefix)
         {
-            var db = new RecommendedNamesEntities();
-            return db.GetNamesByPrefix(prefix).Select(r => r.Name).ToList();
+            using (var db = new RecommendedNamesEntities())
+            {
+                return db.GetNamesByPrefix(prefix).Select(r => r.Name).ToList();
+            }
         }
 
         public static List<RelatedNameResult> GetRelatedNames(string include, string exclude, string block)

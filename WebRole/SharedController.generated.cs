@@ -29,7 +29,6 @@ namespace T4MVC {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ViewNames {
             public readonly string _Layout = "~/Views/Shared/_Layout.cshtml";
-            public readonly string Copy_of__Layout = "~/Views/Shared/Copy of _Layout.cshtml";
             public readonly string Error = "~/Views/Shared/Error.cshtml";
         }
     }

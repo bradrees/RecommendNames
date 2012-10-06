@@ -86,7 +86,7 @@ button, input, select, textarea {
 ---------------------------------------------------------------------- */
 
 html, body {
-  background-color: #f8f8ef;
+  background-color: #FFFFFF;
 }
 
 html {
@@ -224,7 +224,7 @@ li.spaced {
 strong {
   font-weight: normal;
   color: #000;
-  text-shadow: rgba(0, 0, 0, 0.20) 0 0 3px;
+  /*text-shadow: rgba(0, 0, 0, 0.20) 0 0 3px;*/
 }
 
 .header {
