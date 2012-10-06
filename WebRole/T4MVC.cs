@@ -336,6 +336,7 @@ namespace Links {
         public static readonly string jquery_ui_1_8_11_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-ui-1.8.11.min.js") ? Url("jquery-ui-1.8.11.min.js") : Url("jquery-ui-1.8.11.js");
                       
         public static readonly string jquery_ui_1_8_11_min_js = Url("jquery-ui-1.8.11.min.js");
+        public static readonly string jquery_ui_1_8_12_custom_min_js = Url("jquery-ui-1.8.12.custom.min.js");
         public static readonly string jquery_css_scaleRotate_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.css.scaleRotate.min.js") ? Url("jquery.css.scaleRotate.min.js") : Url("jquery.css.scaleRotate.js");
                       
         public static readonly string jquery_css_transform_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.css.transform.min.js") ? Url("jquery.css.transform.min.js") : Url("jquery.css.transform.js");
@@ -355,6 +356,8 @@ namespace Links {
         public static readonly string jquery_validate_unobtrusive_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.validate.unobtrusive.min.js") ? Url("jquery.validate.unobtrusive.min.js") : Url("jquery.validate.unobtrusive.js");
                       
         public static readonly string jquery_validate_unobtrusive_min_js = Url("jquery.validate.unobtrusive.min.js");
+        public static readonly string main_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/main.min.js") ? Url("main.min.js") : Url("main.js");
+                      
         public static readonly string MicrosoftAjax_debug_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/MicrosoftAjax.debug.min.js") ? Url("MicrosoftAjax.debug.min.js") : Url("MicrosoftAjax.debug.js");
                       
         public static readonly string MicrosoftAjax_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/MicrosoftAjax.min.js") ? Url("MicrosoftAjax.min.js") : Url("MicrosoftAjax.js");
@@ -386,12 +389,21 @@ namespace Links {
             public static readonly string action_check_png = Url("action_check.png");
             public static readonly string action_delete_png = Url("action_delete.png");
             public static readonly string action_remove_png = Url("action_remove.png");
+            public static readonly string ajax_loader_gif = Url("ajax-loader.gif");
             public static readonly string buttons_png = Url("buttons.png");
+            public static readonly string female_png = Url("female.png");
+            public static readonly string Logo_png = Url("Logo.png");
+            public static readonly string male_png = Url("male.png");
             public static readonly string save_png = Url("save.png");
             public static readonly string search_png = Url("search.png");
             public static readonly string splitter_png = Url("splitter.png");
+            public static readonly string star_png = Url("star.png");
+            public static readonly string stop_png = Url("stop.png");
+            public static readonly string ui_anim_basic_16x16_gif = Url("ui-anim_basic_16x16.gif");
             public static readonly string user_female_png = Url("user_female.png");
             public static readonly string user_male_png = Url("user_male.png");
+            public static readonly string vote_no_png = Url("vote_no.png");
+            public static readonly string vote_yes_png = Url("vote_yes.png");
         }
     
         public static readonly string ie7_css = Url("ie7.css");
@@ -441,6 +453,35 @@ namespace Links {
                 public static readonly string jquery_ui_slider_css = Url("jquery.ui.slider.css");
                 public static readonly string jquery_ui_tabs_css = Url("jquery.ui.tabs.css");
                 public static readonly string jquery_ui_theme_css = Url("jquery.ui.theme.css");
+            }
+        
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class custom_theme {
+                private const string URLPATH = "~/Content/themes/custom-theme";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class images {
+                    private const string URLPATH = "~/Content/themes/custom-theme/images";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string ui_bg_flat_30_cccccc_40x100_png = Url("ui-bg_flat_30_cccccc_40x100.png");
+                    public static readonly string ui_bg_flat_50_5c5c5c_40x100_png = Url("ui-bg_flat_50_5c5c5c_40x100.png");
+                    public static readonly string ui_bg_glass_40_ffc73d_1x400_png = Url("ui-bg_glass_40_ffc73d_1x400.png");
+                    public static readonly string ui_bg_highlight_hard_20_595e64_1x100_png = Url("ui-bg_highlight-hard_20_595e64_1x100.png");
+                    public static readonly string ui_bg_highlight_soft_25_2d3033_1x100_png = Url("ui-bg_highlight-soft_25_2d3033_1x100.png");
+                    public static readonly string ui_bg_highlight_soft_33_595e64_1x100_png = Url("ui-bg_highlight-soft_33_595e64_1x100.png");
+                    public static readonly string ui_bg_highlight_soft_35_2d3033_1x100_png = Url("ui-bg_highlight-soft_35_2d3033_1x100.png");
+                    public static readonly string ui_bg_highlight_soft_44_444444_1x100_png = Url("ui-bg_highlight-soft_44_444444_1x100.png");
+                    public static readonly string ui_bg_highlight_soft_80_eeeeee_1x100_png = Url("ui-bg_highlight-soft_80_eeeeee_1x100.png");
+                    public static readonly string ui_icons_222222_256x240_png = Url("ui-icons_222222_256x240.png");
+                    public static readonly string ui_icons_4b8e0b_256x240_png = Url("ui-icons_4b8e0b_256x240.png");
+                    public static readonly string ui_icons_a83300_256x240_png = Url("ui-icons_a83300_256x240.png");
+                    public static readonly string ui_icons_cccccc_256x240_png = Url("ui-icons_cccccc_256x240.png");
+                    public static readonly string ui_icons_ffffff_256x240_png = Url("ui-icons_ffffff_256x240.png");
+                }
+            
+                public static readonly string jquery_ui_1_8_12_custom_css = Url("jquery-ui-1.8.12.custom.css");
             }
         
         }

@@ -1,11 +1,14 @@
 ﻿@model List<string>
 @{
-    ViewBag.Title = "Search for names";
+    ViewBag.Title = "Search for baby names";
 }
 
 <ul class="splitter">
 <li>
-To start click a name or search here: <input type="text" class="searchbox" /> <a href="#" class="search button">Search</a>
+To start click a name or search here: <input type="text" class="searchbox" />
+</li>
+<li>
+<a href="#" class="search button">Search</a>
 </li>
 </ul>
 <div class="lists">    
@@ -101,7 +104,7 @@ Seems sluggish? <a href="#">Disable CSS3 scaling</a> and try again.</p>
         };
 
         $(function () {
-            $(".button").button();
+            //$(".button").button();
 
             $('a.showAbout').live('click', function () {
                 $(".about").dialog({ width: 600 });

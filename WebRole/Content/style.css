@@ -86,7 +86,7 @@ button, input, select, textarea {
 ---------------------------------------------------------------------- */
 
 html, body {
-  background-color: #2d3033;
+  background-color: #f8f8ef;
 }
 
 html {
@@ -96,13 +96,13 @@ html {
 
 body {
   font: normal 13px/1.5 "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Verdana, sans-serif;
-  color: #dde9ec;
+  color: #544c3b;
   padding-bottom: 40px;
 }
 
 #wrapper {
   width: 942px;
-  border: 9px solid #33373b;
+  border: 9px solid #dbdbd1;
   margin: 20px auto;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
@@ -110,19 +110,20 @@ body {
 }
 
 #site {
-  border: 1px solid #222527;
-  background-color: #282b2e;
+  border: 1px solid #c7c7be;
+  background-color: #f8f8ef;
   padding: 40px;
+    padding-top: 10px;
 }
 
 a {
-  color: #46c5ec;
+  color: #297085;
   /*border-bottom: 1px solid #294e5a;*/
 }
 
 a:hover,
 a:focus {
-  color: #ededed;
+  color: #24273f;
   border-bottom-color: #595959;
 }
 
@@ -222,59 +223,17 @@ li.spaced {
 
 strong {
   font-weight: normal;
-  color: #fff;
-  text-shadow: rgba(255, 255, 255, 0.85) 0 0 3px;
+  color: #000;
+  text-shadow: rgba(0, 0, 0, 0.20) 0 0 3px;
 }
 
 .header {
   font: normal 24px/1 "Myriad Pro", "Myriad", "Gill Sans", "Frutiger Linotype", "Helvetica Neue", sans-serif;
   text-shadow: rgba(0, 0, 0, 0.5) 0 1px 2px;
-  color: #46c5ec;
-  background: url("i/arrow.png") no-repeat;
   margin-left: -59px;
   padding-left: 59px;
   margin-top: 16px;
   padding-top: 4px;
-}
-
-.misc ~ .header {
-  background-image: url("i/arrow-misc.png");
-  color: #6f7378;
-}
-
-pre {
-  margin-left: -20px;
-  margin-right: -20px;
-  padding: 10px 20px;
-  -webkit-border-radius: 5px; 
-  -moz-border-radius: 5px; 
-  border-radius: 5px; 
-  background-color: #1d1f21;
-}
-
-code {
-  font-family: "Monaco", "Consolas", "Lucida Console", "Courier New", "Courier";
-  background-color: #1d1f21;
-}
-
-.code-source {
-  color: #df9e2e;
-}
-
-.code-dest {
-  color: #d36666;
-}
-
-.code-dest-item {
-  color: #a1d366;
-}
-
-.code-data-attr {
-  color: #7f8687;
-}
-
-.code-dest-item .code-data-attr {
-  color: #536e35;
 }
 
 table {
@@ -320,7 +279,7 @@ table .param-default {
 }
 
 .button {
-  background-color: #46c5ec;
+  background-color: #dbdbd1;
   color: #282b2e;
   padding: 5px 10px;
   -webkit-border-radius: 5px;
@@ -356,8 +315,8 @@ pre:hover + .note,
 .splitter {
   margin: 15px -40px;
   text-align: center;
-  background: #35393c url("i/splitter.png") repeat-x 0 100%;
-  border-bottom: 1px solid #1d1f21;
+  background: #CBC7C3 url("i/splitter.png") repeat-x 0 100%;
+  border-bottom: 1px solid #b9b6b1;
   padding: 6px 40px 5px;
   font-size: 12px;
 }
@@ -444,7 +403,7 @@ pre:hover + .note,
 .splitter ul li.selected-0 a,
 .splitter ul li.selected-1 a,
 .splitter ul li.selected-2 a {
-  color: #fff;
+  color: #000;
   text-shadow: rgba(0, 0, 0, 0.25) 0 1px 0;
 }
 
@@ -619,22 +578,22 @@ pre:hover + .note,
 .image-grid li strong span a {
     font-size: 23px;
     line-height: 25px;
-    color: #fff;
+    color: #72705c;
     text-transform: capitalize;
 }
 
 .image-grid li strong {
-  color: #fff;
+  color: #000;
 }
 
 .image-grid li.male strong span a
 {
-    color: #b1e5ff;   
+    color: #308cbe;   
 }
 
 .image-grid li.female strong span a
 {
-    color: #ffc2e4;   
+    color: #ae417e;   
 }
 
 .image-grid li span.buttons
@@ -681,12 +640,12 @@ pre:hover + .note,
     width: 166px;
     margin: 10px 0 0 10px;
     padding: 5px 10px 20px;
-    background-color: #242729;
+    background-color: #F8F8EF;
     /*border: 1px solid #555;*/
     height: 100%;
     -moz-border-radius: 5px 5px 5px 5px;
     border-radius: 5px 5px 5px 5px;
-    border: 9px solid #33373B;
+    border: 9px solid #dbdbd1;
     min-height: 80px;
 }
 
@@ -715,10 +674,10 @@ pre:hover + .note,
 
 .searchbox
 {
-    background-color: #242729;
-    border: 4px solid #595f66;
+    background-color: #F8F8EF;
+    border: 4px solid #dbdbd1;
     border-radius: 5px 5px 5px 5px;
-    color: #fff;
+    color: #000;
 }
 
 .ui-autocomplete 

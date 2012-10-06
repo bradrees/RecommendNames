@@ -132,6 +132,7 @@
     <Content Include="Content\i\ajax-loader.gif" />
     <Content Include="Content\i\buttons.png" />
     <Content Include="Content\i\female.png" />
+    <Content Include="Content\i\Logo.png" />
     <Content Include="Content\i\male.png" />
     <Content Include="Content\i\save.png" />
     <Content Include="Content\i\search.png" />
@@ -173,19 +174,34 @@
     <Content Include="Content\themes\base\jquery.ui.theme.css" />
     <Content Include="Content\themes\custom-theme\images\ui-bg_flat_30_cccccc_40x100.png" />
     <Content Include="Content\themes\custom-theme\images\ui-bg_flat_50_5c5c5c_40x100.png" />
+    <Content Include="Content\themes\custom-theme\images\ui-bg_flat_75_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\custom-theme\images\ui-bg_glass_100_f5f0e5_1x400.png" />
+    <Content Include="Content\themes\custom-theme\images\ui-bg_glass_25_dbdbd1_1x400.png" />
     <Content Include="Content\themes\custom-theme\images\ui-bg_glass_40_ffc73d_1x400.png" />
+    <Content Include="Content\themes\custom-theme\images\ui-bg_glass_70_ede4d4_1x400.png" />
+    <Content Include="Content\themes\custom-theme\images\ui-bg_highlight-hard_100_f4f0ec_1x100.png" />
     <Content Include="Content\themes\custom-theme\images\ui-bg_highlight-hard_20_595e64_1x100.png" />
+    <Content Include="Content\themes\custom-theme\images\ui-bg_highlight-hard_65_fee4bd_1x100.png" />
+    <Content Include="Content\themes\custom-theme\images\ui-bg_highlight-hard_75_f5f5b5_1x100.png" />
     <Content Include="Content\themes\custom-theme\images\ui-bg_highlight-soft_25_2d3033_1x100.png" />
     <Content Include="Content\themes\custom-theme\images\ui-bg_highlight-soft_33_595e64_1x100.png" />
     <Content Include="Content\themes\custom-theme\images\ui-bg_highlight-soft_35_2d3033_1x100.png" />
     <Content Include="Content\themes\custom-theme\images\ui-bg_highlight-soft_44_444444_1x100.png" />
     <Content Include="Content\themes\custom-theme\images\ui-bg_highlight-soft_80_eeeeee_1x100.png" />
+    <Content Include="Content\themes\custom-theme\images\ui-bg_inset-soft_100_f4f0ec_1x100.png" />
     <Content Include="Content\themes\custom-theme\images\ui-icons_222222_256x240.png" />
     <Content Include="Content\themes\custom-theme\images\ui-icons_4b8e0b_256x240.png" />
+    <Content Include="Content\themes\custom-theme\images\ui-icons_94887a_256x240.png" />
+    <Content Include="Content\themes\custom-theme\images\ui-icons_a69c91_256x240.png" />
     <Content Include="Content\themes\custom-theme\images\ui-icons_a83300_256x240.png" />
+    <Content Include="Content\themes\custom-theme\images\ui-icons_aea57a_256x240.png" />
+    <Content Include="Content\themes\custom-theme\images\ui-icons_c0b696_256x240.png" />
+    <Content Include="Content\themes\custom-theme\images\ui-icons_cb672b_256x240.png" />
     <Content Include="Content\themes\custom-theme\images\ui-icons_cccccc_256x240.png" />
+    <Content Include="Content\themes\custom-theme\images\ui-icons_ff7519_256x240.png" />
     <Content Include="Content\themes\custom-theme\images\ui-icons_ffffff_256x240.png" />
     <Content Include="Content\themes\custom-theme\jquery-ui-1.8.12.custom.css" />
+    <Content Include="Content\themes\custom-theme\jquery-ui-1.8.13.custom.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\jquery-1.4.2.plusPlugins.js" />
@@ -243,6 +259,9 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>RecommendNames.Designer.cs</LastGenOutput>
     </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\Copy of _Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
